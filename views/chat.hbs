@@ -1,39 +1,132 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Live Chat</title>
+    <link rel="icon" type="image/png" href="../views/chat.png">
     <style>
-       body {
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(135deg, #1e3c72, #2a5298, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
-  background-size: 600% 600%;
-  animation: gradientBG 12s ease infinite;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  color: #fff;
-  text-align: center;
-  
-}
+        .jwt-container {
+            position: absolute;
+            top: 400px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+        }
 
-@keyframes gradientBG {
-  0% { background-position: 0% 50%; }
-  25% { background-position: 50% 100%; }
-  50% { background-position: 100% 50%; }
-  75% { background-position: 50% 0%; }
-  100% { background-position: 0% 50%; }
-}
+        .jwt-key {
+            word-break: break-all;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background: #f4f4f4;
+            margin-bottom: 10px;
+        }
 
-p {
-  font-size: 18px;
-  font-weight: 300;
-  margin-bottom: 25px;
-}
+        .jwt-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background: #158ffe;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .jwt-buttons button:hover {
+            background: #0b6ecd;
+        }
+    </style>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg,
+                    #1e3c72,
+                    /* Deep Blue */
+                    #2a5298,
+                    /* Medium Blue */
+                    #4a90e2,
+                    /* Light Blue */
+                    #00c6ff,
+                    /* Sky Blue */
+                    #00ff9d,
+                    /* Aqua Green */
+                    #a8eb12,
+                    /* Lime Green */
+                    #fdd835,
+                    /* Yellow */
+                    #ff8c00,
+                    /* Orange */
+                    #ff416c,
+                    /* Deep Pink */
+                    #ff9a9e,
+                    /* Soft Pink */
+                    #fad0c4,
+                    /* Peach */
+                    #fbc2eb,
+                    /* Light Purple */
+                    #a18cd1,
+                    /* Lavender */
+                    #ffdde1,
+                    /* Pastel Pink */
+                    #ff007f,
+                    /* Neon Pink */
+                    #9400d3,
+                    /* Dark Violet */
+                    #4b0082,
+                    /* Indigo */
+                    #001f3f
+                    /* Navy Blue */
+                );
+
+            background-size: 600% 600%;
+            animation: gradientBG 12s ease infinite;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: black;
+            text-align: center;
+
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            25% {
+                background-position: 50% 100%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            75% {
+                background-position: 50% 0%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        p {
+            font-size: 18px;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
 
         h1 {
             position: absolute;
@@ -50,7 +143,7 @@ p {
             -webkit-text-fill-color: transparent;
         }
 
-        h2{
+        h2 {
             color: #000;
         }
 
@@ -67,19 +160,20 @@ p {
         }
 
         .modal-content {
-    background-color: #fefefe;
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    position: absolute;
-    left: 50%;
-    top: 35%;
-    transform: translate(-50%, -50%);
-}
+            background-color: #fefefe;
+            text-align: center;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: absolute;
+            left: 50%;
+            top: 35%;
+            transform: translate(-50%, -50%);
+        }
+
         .close {
             color: #aaa;
             float: right;
@@ -121,9 +215,9 @@ p {
         .input-group input {
             width: 100%;
             padding: 10px;
-            border: 2px solid #158ffe; 
-            border-radius: 5px; 
-            background-color: #f2f2f2; 
+            border: 2px solid #158ffe;
+            border-radius: 5px;
+            background-color: #f2f2f2;
             box-sizing: border-box;
             transition: border-color 0.3s;
             outline: none;
@@ -138,26 +232,26 @@ p {
         }
 
         .button-group button {
-           display: inline-block;
-  padding: 15px 35px;
-  border: none;
-  background: linear-gradient(45deg, #ff416c, #ff4b2b, #1e3c72);
-  color: #fff;
-  text-decoration: none;
-  border-radius: 50px;
-  font-weight: bold;
-  font-size: 18px;
-  transition: 0.3s;
-  box-shadow: 0 5px 15px rgba(255, 75, 43, 0.5);
-  cursor: pointer;
+            display: inline-block;
+            padding: 15px 35px;
+            border: none;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b, #1e3c72);
+            color: #fff;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 75, 43, 0.5);
+            cursor: pointer;
         }
 
         .button-group button:hover {
-         transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(255, 75, 43, 0.7);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 75, 43, 0.7);
         }
 
-        
+
 
         #container {
             position: relative;
@@ -209,13 +303,53 @@ p {
             position: fixed;
             bottom: 0;
             width: 100%;
-              background: linear-gradient(135deg, #1e3c72, #2a5298, #ff9a9e, #fad0c4, #fad0c4, #ffdde1);
+            background: linear-gradient(135deg,
+                    #1e3c72,
+                    /* Deep Blue */
+                    #2a5298,
+                    /* Medium Blue */
+                    #4a90e2,
+                    /* Light Blue */
+                    #00c6ff,
+                    /* Sky Blue */
+                    #00ff9d,
+                    /* Aqua Green */
+                    #a8eb12,
+                    /* Lime Green */
+                    #fdd835,
+                    /* Yellow */
+                    #ff8c00,
+                    /* Orange */
+                    #ff416c,
+                    /* Deep Pink */
+                    #ff9a9e,
+                    /* Soft Pink */
+                    #fad0c4,
+                    /* Peach */
+                    #fbc2eb,
+                    /* Light Purple */
+                    #a18cd1,
+                    /* Lavender */
+                    #ffdde1,
+                    /* Pastel Pink */
+                    #ff007f,
+                    /* Neon Pink */
+                    #9400d3,
+                    /* Dark Violet */
+                    #4b0082,
+                    /* Indigo */
+                    #001f3f
+                    /* Navy Blue */
+                );
+
+            animation: gradientBG 12s ease infinite;
             padding: 6px;
             box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
+
 
         form input {
             flex: 1;
@@ -239,27 +373,28 @@ p {
         form button:hover {
             background: #8ab7e0;
         }
+
         .back-button {
-    position: absolute;
-    top: 0.7%;
-    left: 2%; 
-    text-decoration: none;
-}
+            position: absolute;
+            top: 0.7%;
+            left: 2%;
+            text-decoration: none;
+        }
 
-.back-button img {
-    width: 45px;
-    height: 45px;
-    margin-right: 5px;
-    vertical-align: middle;
-}
+        .back-button img {
+            width: 45px;
+            height: 45px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
 
-.back-button img:hover{
-    background: #158ffe;
-  color: #fff;
-  font-weight: bold;
-  transition: background-color 0.3s, transform 0.3s;
-  transform: scale(1.1);
-}
+        .back-button img:hover {
+            background: #158ffe;
+            color: #fff;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            transform: scale(1.1);
+        }
 
         @media (max-width: 600px) {
             form {
@@ -272,27 +407,39 @@ p {
         }
 
         @media (max-width: 600px) {
-    .modal-content {
-        width: 90%;
-        max-width: none;
-        
-    }
-}
+            .modal-content {
+                width: 90%;
+                max-width: none;
+
+            }
+        }
     </style>
 </head>
+
 <body>
     <h1>Secret Chat</h1>
-     <a href="/" class="back-button">
+    <a href="/" class="back-button">
         <img src="https://i.postimg.cc/Ghw7c3bx/back-button-white.png" alt="Go Back">
-        </a>
+    </a>
+
+    <div class="jwt-container">
+        <h2>JWT Secret Key</h2>
+        <div class="jwt-key" id="jwtKey"></div>
+        <div class="jwt-buttons">
+            <button onclick="copyJWT()">Copy</button>
+            <button onclick="pasteJWT()">Paste</button>
+        </div>
+        <input type="text" id="pasteField" placeholder="Paste here..."
+            style="width: 97%; padding: 8px; margin-top: 10px; border: 1px solid #ccc; border-radius: 5px;">
+    </div>
     <div class="modal" id="usernameModal">
         <div class="modal-content">
 
-                <span class="close" onclick="closeModal()">&times;</span>
-                <h2 style="text-align: center;">Enter Your Username</h2>
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 style="text-align: center;">Enter Your Username</h2>
             <div class="modal-body">
                 <div class="input-group">
-                    <input type="text" id="usernameInput">
+                    <input type="text" id="usernameInput" autofocus>
                 </div>
             </div>
             <div class="modal-footer">
@@ -302,12 +449,22 @@ p {
             </div>
         </div>
     </div>
+
+    <button onclick="document.querySelector('.jwt-container').style.display='block'"
+        style="position: absolute; top: 10px; right: 10px; background: transparent; border: 2px solid #a0cffa; color: #90bfeb; padding: 10px 20px; border-radius: 25px; cursor: pointer; transition: 0.3s;">
+        Show JWT Key
+    </button>
+
+
+
     <div id="container">
         <ul id="messages"></ul>
     </div>
     <form id="form" style="display:none;">
-        <input id="input" autocomplete="off" placeholder="Type your message here" style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; width: 70%;">
-        <button style="background: #158ffe; color: #fff; border: none; padding: 12px; border-radius: 5px; cursor: pointer;">Send</button>
+        <input id="input" autocomplete="off" placeholder="Type your message here"
+            style="padding: 12px; border: 1px solid #ccc; border-radius: 5px; width: 70%;" autofocus>
+        <button
+            style="background: #158ffe; color: #fff; border: none; padding: 12px; border-radius: 5px; cursor: pointer;">Send</button>
     </form>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -319,8 +476,46 @@ p {
         var messagesList = document.getElementById('messages');
         var modal = document.getElementById('usernameModal');
 
+        function generateJWTKey() {
+            const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_=+";
+            let jwtKey = "";
+            for (let i = 0; i < 32; i++) { // Generate a 32-character random key
+                jwtKey += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            localStorage.setItem("jwt-key", jwtKey); // Store in local storage
+            document.getElementById("jwtKey").textContent = jwtKey; // Display in UI
+        }
+
+        window.onload = function () {
+            const storedJWT = localStorage.getItem("jwt-key");
+            if (storedJWT) {
+                document.getElementById("jwtKey").textContent = storedJWT;
+            } else {
+                generateJWTKey(); // Generate if no key is stored
+            }
+        };
+
+
+        function copyJWT() {
+            var jwtText = document.getElementById("jwtKey").textContent;
+            navigator.clipboard.writeText(jwtText).then(() => {
+                alert("JWT Key copied!");
+                document.querySelector(".jwt-container").style.display = "none"; // Hide JWT container
+            });
+        }
+
+        function pasteJWT() {
+            navigator.clipboard.readText().then(text => {
+                const newKey = generateJWTKey(); // Generate new key every time
+                document.getElementById("pasteField").value = newKey;
+                document.querySelector(".jwt-container").style.display = "none"; // Hide JWT container
+            }).catch(err => console.error("Failed to read clipboard: ", err));
+        }
+
+
         function openModal() {
             modal.style.display = 'block';
+            document.getElementById('usernameInput').focus();
         }
 
         function closeModal() {
@@ -335,6 +530,7 @@ p {
                 closeModal();
             }
         }
+
 
         form.addEventListener('submit', function (e) {
             e.preventDefault();
@@ -381,4 +577,5 @@ p {
         openModal();
     </script>
 </body>
+
 </html>
